@@ -1,10 +1,5 @@
 package org.projects;
 
-/*
-MapEditor: This class will extend JPanel and will be responsible for rendering
-the grid and handling user input (e.g., moving the cursor, painting/removing cells).
-*/
-
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 import org.academiadecodigo.simplegraphics.keyboard.Keyboard;
@@ -63,6 +58,16 @@ public class MapEditor implements KeyboardHandler {
         paintCell.setKey(KeyboardEvent.KEY_SPACE);
         paintCell.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
         keyboard.addEventListener(paintCell);
+
+        KeyboardEvent save = new KeyboardEvent();
+        save.setKey(KeyboardEvent.KEY_S);
+        save.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(save);
+
+        KeyboardEvent load = new KeyboardEvent();
+        load.setKey(KeyboardEvent.KEY_L);
+        load.setKeyboardEventType(KeyboardEventType.KEY_PRESSED);
+        keyboard.addEventListener(load);
     }
 
 
@@ -97,9 +102,17 @@ public class MapEditor implements KeyboardHandler {
     private void paintCell() {
         int gridX = cursorX / Cell.PADDING;
         int gridY = cursorY / Cell.PADDING;
-       Cell cell = grid.getCell(gridX, gridY);
+        Cell cell = grid.getCell(gridX, gridY);
+        cell.setPainted(!cell.isPainted());
+    }
 
-       cell.setPainted();
+    private void save() {
+        System.out.println("save");
+        FileManager.save(grid);
+    }
+
+    private void load() {
+        System.out.println("load");
     }
 
     @Override
@@ -123,8 +136,13 @@ public class MapEditor implements KeyboardHandler {
             case (KeyboardEvent.KEY_SPACE):
                 paintCell();
                 break;
+            case (KeyboardEvent.KEY_S):
+                save();
+                break;
+            case (KeyboardEvent.KEY_L):
+                load();
+                break;
         }
-
     }
 
     @Override

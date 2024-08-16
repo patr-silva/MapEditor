@@ -18,7 +18,6 @@ public class Grid {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 cells[i][j] = new Cell(i, j);
-
             }
         }
     }
@@ -26,7 +25,6 @@ public class Grid {
     public int getHeight() {
         return height;
     }
-
 
     public int getWidth() {
         return width;

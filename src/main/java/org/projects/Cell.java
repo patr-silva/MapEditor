@@ -1,5 +1,4 @@
 package org.projects;
-
 import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
@@ -14,15 +13,14 @@ public class Cell {
         rectangle = new Rectangle(x * PADDING, y * PADDING, PADDING, PADDING);
         rectangle.setColor(Color.ORANGE);
         rectangle.draw();
-
     }
 
     public boolean isPainted() {
         return painted;
     }
 
-    public void setPainted() {
-        this.painted = !this.painted;
+    public void setPainted(boolean painted) {
+        this.painted = painted;
         if(painted){
             this.rectangle.setColor(Color.ORANGE);
             this.rectangle.fill();
@@ -32,5 +30,13 @@ public class Cell {
         }
     }
 
+
+    public String saveCellState(){
+        return painted ? "1" : "0";
+    }
+
+    public void checkCellState(String state){
+        this.setPainted("1".equals(state));
+    }
 
 }
