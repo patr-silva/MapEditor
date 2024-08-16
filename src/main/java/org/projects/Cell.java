@@ -1,18 +1,20 @@
 package org.projects;
 
-/*
-Cell: This class will represent an individual cell in the grid, and will have a boolean property
-to indicate whether the cell is painted or not.
- */
-
+import org.academiadecodigo.simplegraphics.graphics.Color;
 import org.academiadecodigo.simplegraphics.graphics.Rectangle;
 
 public class Cell {
-    private boolean painted;
     public static final int PADDING = 20;
+    private Rectangle rectangle;
+    private boolean painted;
 
-    public Cell(){
-        this.painted = false;
+
+
+    public Cell(int x, int y) {
+        rectangle = new Rectangle(x * PADDING, y * PADDING, PADDING, PADDING);
+        rectangle.setColor(Color.ORANGE);
+        rectangle.draw();
+
     }
 
     public boolean isPainted() {
@@ -21,5 +23,14 @@ public class Cell {
 
     public void setPainted() {
         this.painted = !this.painted;
+        if(painted){
+            this.rectangle.setColor(Color.ORANGE);
+            this.rectangle.fill();
+        } else {
+            rectangle.setColor(Color.ORANGE);
+            rectangle.draw();
+        }
     }
+
+
 }
